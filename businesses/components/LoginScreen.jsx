@@ -3,6 +3,7 @@ import { useWarmUpBrowser } from '@/hooks/useWarmUpBrowser';
 import * as WebBrowser from "expo-web-browser";
 import React from 'react'
 import { useOAuth } from '@clerk/clerk-expo';
+import { Colors } from '@/constants/Colors';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     btn: {
-        backgroundColor: '#1F618D',
+        backgroundColor: Colors.PRIMARY,
         padding: 12,
         borderRadius: 12
     },
