@@ -4,5 +4,5 @@
  */
 
 export const Colors = {
-  PRIMARY: '#1F618D'
+  PRIMARY: '#181818'
 };
