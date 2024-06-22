@@ -20,18 +20,26 @@ export default function Category() {
     querySnapshot.forEach((doc) => output.push(doc.data()));
     return output;
   };
+
+  const onCategoryPress = (category) => {
+    console.log(category)
+  };
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.container}>
         <Text style={styles.header}>Category</Text>
-        <Text style={styles.viewall}>View All</Text>
       </View>
 
       <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={categoryList}
-        renderItem={({ item, index }) => <CategoryItem category={item} />}
+        renderItem={({ item, index }) => 
+          <CategoryItem category={item} 
+          key={index}
+          onCategoryPress={onCategoryPress}
+        />}
         style={styles.flList}
       />
     </View>
@@ -41,18 +49,12 @@ export default function Category() {
 const styles = StyleSheet.create({
   container: {
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
     marginTop: 12,
     marginLeft: 12,
     marginRight: 12,
   },
   header: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  viewall: {
-    color: Colors.PRIMARY,
+    fontSize: 22,
     fontWeight: "bold",
   },
   flList: {
