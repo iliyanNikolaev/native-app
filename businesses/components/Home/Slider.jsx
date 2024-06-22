@@ -54,6 +54,6 @@ const styles = StyleSheet.create({
     objectFit: 'cover'
   },
   flList: {
-    marginTop: 12
+    marginTop: 12 
   }
 });
