@@ -5,7 +5,7 @@ import { Colors } from "@/constants/Colors";
 export default function CategoryItem({ category, onCategoryPress }) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => onCategoryPress(category)}>
+      <TouchableOpacity onPress={() => onCategoryPress(category.name)}>
         <Image source={{ uri: category.icon }} style={styles.icon} />
       </TouchableOpacity>
       <Text style={styles.name}>{category.name}</Text>

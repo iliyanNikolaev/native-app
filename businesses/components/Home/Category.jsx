@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "@/config/FirebaseConfig";
 import CategoryItem from "./CategoryItem";
-import { Colors } from "@/constants/Colors";
+import { useRouter } from "expo-router";
 
 export default function Category() {
   const [categoryList, setCategoryList] = useState([]);
-
+  const router = useRouter();
   useEffect(() => {
     getCategoryList().then((data) => setCategoryList(data));
   }, []);
@@ -15,14 +15,13 @@ export default function Category() {
   const getCategoryList = async () => {
     const q = query(collection(db, "Category"));
     const querySnapshot = await getDocs(q);
-
     const output = [];
     querySnapshot.forEach((doc) => output.push(doc.data()));
     return output;
   };
 
   const onCategoryPress = (category) => {
-    console.log(category)
+    router.push("businesslist/" + category);
   };
 
   return (
@@ -35,11 +34,13 @@ export default function Category() {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={categoryList}
-        renderItem={({ item, index }) => 
-          <CategoryItem category={item} 
-          key={index}
-          onCategoryPress={onCategoryPress}
-        />}
+        renderItem={({ item, index }) => (
+          <CategoryItem
+            category={item}
+            key={index}
+            onCategoryPress={onCategoryPress}
+          />
+        )}
         style={styles.flList}
       />
     </View>
@@ -58,6 +59,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   flList: {
-    marginTop: 12
-  }
+    marginTop: 12,
+  },
 });

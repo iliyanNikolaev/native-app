@@ -6,17 +6,18 @@ import { db } from "@/config/FirebaseConfig";
 import PopularBusinessItem from "./PopularBusinessItem";
 
 export default function PopularBusiness() {
-    const [popularBusinessList, setPopularBusinessList] = useState([]);
-    
-    useEffect(() => {
-        getBusinessList().then(data => {
-            setPopularBusinessList(data)
-            console.log(data);
-        }).catch(err => console.log(err));
-    }, []);
-    
-    const getBusinessList = async () => {
-        const q = query(collection(db, "Business"));
+  const [popularBusinessList, setPopularBusinessList] = useState([]);
+
+  useEffect(() => {
+    getBusinessList()
+      .then((data) => {
+        setPopularBusinessList(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const getBusinessList = async () => {
+    const q = query(collection(db, "Business"));
     const querySnapshot = await getDocs(q);
 
     const output = [];
@@ -34,10 +35,9 @@ export default function PopularBusiness() {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={popularBusinessList}
-        renderItem={({ item, index }) => 
-          (
-            <PopularBusinessItem business={item}/>
-          )}
+        renderItem={({ item, index }) => (
+          <PopularBusinessItem business={item} />
+        )}
         style={styles.flList}
       />
     </View>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
     marginLeft: 12,
     marginRight: 12,
-    marginBottom: 12
+    marginBottom: 12,
   },
   header: {
     fontSize: 16,
@@ -61,8 +61,5 @@ const styles = StyleSheet.create({
   viewall: {
     color: Colors.PRIMARY,
     fontWeight: "bold",
-  },
-  flList: {
-    gap: 5
   }
 });
